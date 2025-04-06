@@ -13,7 +13,7 @@
 
 ## Як запустити
 1. Клонувати репозиторій:
-git clone https://github.com/your-username/cinema-ticket.git
+git clone https://github.com/Avloga228/CodeSquad-app.git
 
 ## Перейти в папку проекту
 cd cinema-ticket
