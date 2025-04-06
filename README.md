@@ -26,5 +26,5 @@ npm start *Додати сервер*
 
 ## Розробники
 - Avloga228 (Павло Чабанов)
--
+- SviatoslavPylyshchyshyn (Святослав Пилищишин)
 -
