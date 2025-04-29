@@ -1,31 +1,41 @@
 # CinemaTicket — Сайт для продажу квитків у кінотеатр
 Наш проєкт — це вебдодаток, що дозволяє користувачам переглядати розклад фільмів та купувати квитки онлайн.
 
-## Технології
-- HTML5, CSS3, JavaScript
-- Фреймворк: (React / Vue / інший — TBD)
-- Бекенд: (Node.js / Express — TBD)
-- База даних: (MongoDB / Firebase / інше — TBD)
+## Технолії 
+- HTML5, JavaScript 
+- Фреймворк: Django (бекенд і шаблони)
+- Фронтенд: Django templates + Vanilla JavaScript
+- Бекенд: Python
+- База даних: SQLite
 - GitHub для контролю версій
 
 ## Структура проєкту
-index.html
-styles.css 
-(на момент створення цього файлу)
-## Як запустити
-1. Клонувати репозиторій:
+(поки не визначена)
+
+# Як запустити
+## 1. Клонувати репозиторій:
 git clone https://github.com/Avloga228/CodeSquad-app.git
 
-## Перейти в папку проекту
-cd cinema-ticket
+## 2. Створити віртуальне середовище
+python -m venv env
+source .\env\Scripts\activate - для Windows
+source env/bin/activate - Для Unix та MacOS систем
 
-## Встановити залежності
-npm instal *Добавити залежності*
+## 3. Встановити залежності
+pip install -r requirements.txt
+## 4. Запустити сервер розробника
+python manage.py runserver
+## 5. Перейти по посиланню у вашому браузері
+http://localhost8000
 
-## Запустити локальний сервер
-npm start *Додати сервер*
+# Як вносити зміни? (Для розробників)
+1. Створити нову гілку (git checkout -b feature/improvement)
+2. Зробити зміни
+3. Закомітити їх ( git commit -am 'Add new feature')
+4. Занести у гілку (git push origin feature/improvement)
+5. Створити новий Pull Request.
 
-## Розробники
+# Розробники
 - Avloga228 (Павло Чабанов)
 - SviatoslavPylyshchyshyn (Святослав Пилищишин)
 - 6NTRC6 (Тимків Назар)
