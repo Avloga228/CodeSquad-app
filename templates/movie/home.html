@@ -1,0 +1,452 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="bg-gray-900 text-white">
+    <!-- Hero Slider Section -->
+    <section class="relative bg-gray-900 py-8">
+        <div id="slider" class="slider overflow-hidden relative mx-auto max-w-6xl bg-gray-800 rounded-lg" style="height: 500px;">
+            <!-- Main Slider -->
+            <div class="slider-container relative w-full h-full flex transition-transform duration-500">
+                <!-- Slide 1 -->
+                <div class="slide min-w-full relative h-full">
+                    <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black opacity-60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">NEW</span>
+                        <h1 class="text-4xl font-bold mt-2 mb-4">Chainsaw Man: Season 2</h1>
+                        <p class="mb-6">Новий сезон легендарного аніме вже доступний...</p>
+                        <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            ДИВИТИСЬ ЗАРАЗ
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide min-w-full relative h-full">
+                    <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black opacity-60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">AD</span>
+                        <h1 class="text-4xl font-bold mt-2 mb-4">Kung Fu Panda: The Legend 2024</h1>
+                        <p class="mb-6">Після 30 днів подорожі по всьому світу...</p>
+                        <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            ДИВИТИСЬ ЗАРАЗ
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="slide min-w-full relative h-full">
+                    <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black opacity-60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">POPULAR</span>
+                        <h1 class="text-4xl font-bold mt-2 mb-4">Solo Leveling: Arise</h1>
+                        <p class="mb-6">Історія людини, яка бореться за виживання...</p>
+                        <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            ДИВИТИСЬ ЗАРАЗ
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="slide min-w-full relative h-full">
+                    <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black opacity-60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">EXCLUSIVE</span>
+                        <h1 class="text-4xl font-bold mt-2 mb-4">Demon Slayer: Final Season</h1>
+                        <p class="mb-6">Фінальна битва за долю світу проти демонів...</p>
+                        <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            ДИВИТИСЬ ЗАРАЗ
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider Navigation -->
+            <button id="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button id="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            
+            <!-- Slider Indicators -->
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+                <div class="flex space-x-2" id="sliderDots">
+                    <button class="w-3 h-3 rounded-full bg-white" data-index="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-400" data-index="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-400" data-index="2"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-400" data-index="3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Navigation -->
+    <section class="py-5">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-10 border-b border-gray-700 pb-2">
+                <a href="#popular" class="text-gray-400 font-medium focus:outline-none hover:bg-gray-800 hover:bg-opacity-50 hover:text-white px-4 py-2 rounded-md" id="popular-btn">Найпопулярніші</a>
+                <a href="#trending" class="text-gray-400 font-medium focus:outline-none hover:bg-gray-800 hover:bg-opacity-50 hover:text-white px-4 py-2 rounded-md" id="trending-btn">Зараз в тренді</a>
+                <a href="#searching" class="text-gray-400 font-medium focus:outline-none hover:bg-gray-800 hover:bg-opacity-50 hover:text-white px-4 py-2 rounded-md" id="searching-btn">Що шукають</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Most Popular Movies Section -->
+    <section class="py-10" id="popular">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold uppercase">Найпопулярніші</h2>
+                <a href="{% url 'movies:popular_movies_list' %}" class="text-sm flex items-center text-gray-300 hover:text-white">
+                    ДИВИТИСЬ УСІ
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Movie Card 1 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">9.0/10</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <a href="#" class="bg-red-600 text-white rounded-full p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                        </div>
+                        <h3 class="font-bold text-lg">Solo Leveling (2024)</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 2 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">10.0/10</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <a href="#" class="bg-red-600 text-white rounded-full p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Комедія</span>
+                        </div>
+                        <h3 class="font-bold text-lg">Mashle: Magic and Muscles</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 3 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">8.8/10</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <a href="#" class="bg-red-600 text-white rounded-full p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Романтика</span>
+                        </div>
+                        <h3 class="font-bold text-lg">The Daily Life of the Immortal King</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 4 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">7.9/10</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <a href="#" class="bg-red-600 text-white rounded-full p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Комедія</span>
+                        </div>
+                        <h3 class="font-bold text-lg">The Strongest Tank's Labyrinth</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 5 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">9.9/10</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <a href="#" class="bg-red-600 text-white rounded-full p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Драма</span>
+                        </div>
+                        <h3 class="font-bold text-lg">ChainSaw Man</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Now Section -->
+    <section class="py-10" id="trending">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold uppercase">Зараз в тренді</h2>
+                <a href="{% url 'movies:new_movies_list' %}" class="text-sm flex items-center text-gray-300 hover:text-white">
+                    ДИВИТИСЬ УСІ
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Movie Card 1 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">9.0/10</div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                        </div>
+                        <h3 class="font-bold text-lg">Solo Leveling (2024)</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 2 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">10.0/10</div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Комедія</span>
+                        </div>
+                        <h3 class="font-bold text-lg">Mashle: Magic and Muscles</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 3 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">8.8/10</div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Романтика</span>
+                        </div>
+                        <h3 class="font-bold text-lg">The Daily Life of the Immortal King</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 4 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">7.9/10</div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Комедія</span>
+                        </div>
+                        <h3 class="font-bold text-lg">The Strongest Tank's Labyrinth</h3>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 5 -->
+                <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="{% static 'assets/movie-image.jpg' %}" alt="Movie Poster" class="w-full h-auto">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">9.9/10</div>
+                    </div>
+                    <div class="p-3 bg-gray-800">
+                        <div class="flex space-x-1 mb-2">
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Бойовик</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Пригоди</span>
+                            <span class="bg-gray-700 text-xs px-2 py-1 rounded">Драма</span>
+                        </div>
+                        <h3 class="font-bold text-lg">ChainSaw Man</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Add placeholder for the "Searching" section -->
+    <section class="py-10" id="searching">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold uppercase">Що шукають</h2>
+                <a href="#" class="text-sm flex items-center text-gray-300 hover:text-white">
+                    ДИВИТИСЬ УСІ
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Placeholder for movie cards that would be in this section -->
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.querySelector('.slider-container');
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.getElementById('prevSlide');
+        const nextButton = document.getElementById('nextSlide');
+        const dots = document.querySelectorAll('#sliderDots button');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        // Функція для оновлення активного слайду
+        function updateSlide() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Оновлення індикаторів
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('bg-gray-400');
+                    dot.classList.add('bg-white');
+                } else {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-gray-400');
+                }
+            });
+        }
+        
+        // Обробники подій для кнопок
+        prevButton.addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlide();
+        });
+        
+        nextButton.addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlide();
+        });
+        
+        // Обробники для індикаторів
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', function() {
+                currentSlide = index;
+                updateSlide();
+            });
+        });
+        
+        // Автоматичне прокручування слайдів
+        let slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlide();
+        }, 5000);
+        
+        // Зупинка автоматичного прокручування при наведенні миші
+        const sliderContainer = document.getElementById('slider');
+        sliderContainer.addEventListener('mouseenter', function() {
+            clearInterval(slideInterval);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', function() {
+            slideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slideCount;
+                updateSlide();
+            }, 5000);
+        });
+        
+        // Код для навігаційних кнопок категорій
+        const categoryButtons = document.querySelectorAll('#popular-btn, #trending-btn, #searching-btn');
+        
+        // Додати обробники подій до кнопок категорій
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Тільки скролінг, без зміни стилів
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %} 

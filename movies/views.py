@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404 # Add get_object_or_404 f
 
 # Temporary homepage view (will eventually use Project 1's movie_list logic)
 def home_page(request):
-     return render(request, 'base.html', {'title': 'Home'}) # Just renders base for now
+     return render(request, 'movie/home.html', {'title': 'Головна'}) # Використовуємо новий шаблон home.html
 
 # Placeholder views for pages in header nav
 def popular_movies_page(request):
