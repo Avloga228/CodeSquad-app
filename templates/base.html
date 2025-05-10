@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Ticket</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="container"> 
+            <h1>CinemaTicket</h1>
+            <nav>
+                {# Basic navigation placeholder #}
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">Bookings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {# Content from specific pages will go here #}
+        <p>Main content area.</p>
+        {% endblock content %}
+    </main>
+
+    <footer>
+         <div class="container"> 
+             <p>© 2025 CodeSquad. Всі права захищені.</p>
+         </div>
+    </footer>
+
+    {# Script files will be added later #}
+
+</body>
+</html>

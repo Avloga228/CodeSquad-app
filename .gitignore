@@ -1,9 +1,11 @@
 
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
 *.pyd
 *.so
 
+# IDE-specific files
 .vscode/
 .idea/
 *.sublime-workspace
@@ -23,6 +25,20 @@ venv/
 env/       
 
 
+# Django stuff:
+*.log
+*.pot
+*.mo
+*.sqlite3  
+db.sqlite3 
+media/     
+
+# Virtual environment
+.venv/     
+venv/      
+env/       
+
+# Distribution / packaging
 .Python
 env/
 build/
@@ -51,11 +67,15 @@ htmlcov/
 .ruff_cache/
 .venv_performance/
 
-
 .DS_Store
 Thumbs.db
 
 
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
 *~
 *.swp
 *.swo
