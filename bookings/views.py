@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def pricing_page(request):
+    return render(request, 'subscription/subscriptions_list.html', {'title': 'Pricing Plans'})

@@ -15,8 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('movies.urls')), # Main movies page and others
+    path('account/', include('users.urls')), # User login/signup etc. (needed for base.html user section)
+    # path('reviews/', include('reviews.urls')), # Not in base nav, but will be needed later
+    path('pricing/', include('bookings.urls')), # Repurposing bookings app for pricing/checkout path
+    # path('subscription/', include('bookings.urls')), # Alternative, depending on how you name it
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
