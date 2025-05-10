@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
@@ -12,18 +13,30 @@ __pycache__/
 *.komodoproject
 *.gedit-save
 
+*.log
+*.pot
+*.mo
+*.sqlite3  
+db.sqlite3 
+media/     
+
+.venv/     
+venv/      
+env/       
+
+
 # Django stuff:
 *.log
 *.pot
 *.mo
-*.sqlite3  # Your Sqlite database file
-db.sqlite3 # Explicitly ignore the common default name
-media/     # User uploaded files (generally not versioned)
+*.sqlite3  
+db.sqlite3 
+media/     
 
 # Virtual environment
-.venv/     # Ignore the virtual environment directory itself
-venv/      # Common alternative name for virtual environment
-env/       # Common alternative name for virtual environment
+.venv/     
+venv/      
+env/       
 
 # Distribution / packaging
 .Python
@@ -53,6 +66,10 @@ htmlcov/
 .dmypy.json
 .ruff_cache/
 .venv_performance/
+
+.DS_Store
+Thumbs.db
+
 
 # OS-specific files
 .DS_Store

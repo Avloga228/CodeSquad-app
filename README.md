@@ -12,21 +12,45 @@
 ## Структура проєкту
 (поки не визначена)
 
-## Як запустити
-1. Клонувати репозиторій:
+## Як запустити локально
+1. Клонуйте репозиторій:
+```bash
 git clone https://github.com/Avloga228/CodeSquad-app.git
+cd CodeSquad-app
+```
 
-2. Створити віртуальне середовище
+2. Створіть віртуальне середовище python та активуйте його
+```bash
 python -m venv env
-source .\env\Scripts\activate - для Windows
-source env/bin/activate - Для Unix та MacOS систем
+```
+Активація середовища (для Windows):
+```bash
+.\env\Scripts\activate
+```
+Активація середовища (для Unix та MacOS систем):
+```bash
+env/bin/activate 
+```
 
-3. Встановити залежності
+3. Встановіть залежності
+```bash
 pip install -r requirements.txt
-4. Запустити сервер розробника
+```
+
+4. Проведіть міграцію
+```bash
+python manage.py migrate
+```
+
+## Використання
+1. Запустіть сервер розробника
+```bash
 python manage.py runserver
-5. Перейти по посиланню у вашому браузері
-http://localhost8000
+```
+2. Вебсайт буде доступним за посиланням:
+```bash
+http://localhost:8000
+```
 
 ## Як вносити зміни? (Для розробників)
 1. Створити нову гілку (git checkout -b feature/improvement)
