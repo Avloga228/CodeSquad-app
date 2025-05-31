@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto p-4 text-white flex flex-col items-center" style="background-color: #0a0a23;">
+    <!-- Back button -->
+    <div class="w-full mb-4">
+        <a href="{% url 'movies:home_page' %}" class="inline-flex items-center text-gray-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Назад
+        </a>
+    </div>
+
+    <h1 class="text-2xl font-bold mb-8 text-center">Оформлення квитка</h1>
+
+    <!-- Movie Info (Image centered, Title next to it) -->
+    <div class="w-full mb-6 flex flex-col items-center md:flex-row md:items-start">
+        <!-- 1. Movie Image Container -->
+        <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+            <div class="border border-white p-4 h-64 w-48 flex items-center justify-center">
+                Картинка фільму
+            </div>
+        </div>
+
+        <!-- 2. Movie Title -->
+        <div class="w-full md:w-2/3 px-4 text-center md:text-left flex items-center">
+            <h2 class="text-xl font-semibold">Назва фільму і тд</h2>
+        </div>
+    </div>
+
+    <!-- 3. Available Dates -->
+    <div class="w-full mb-6">
+        <h3 class="text-lg font-semibold mb-2 text-center">Доступні дати:</h3>
+        <div class="flex justify-center space-x-4">
+            <div class="date-option border border-white p-4 text-center cursor-pointer" data-date="2025-05-12">
+                <div class="w-8 h-8 mx-auto mb-2 border border-white"></div>
+                пн 12 травня
+            </div>
+            <div class="date-option border border-white p-4 text-center cursor-pointer" data-date="2025-05-14">
+                <div class="w-8 h-8 mx-auto mb-2 border border-white"></div>
+                ср 14 травня
+            </div>
+             <div class="date-option border border-white p-4 text-center cursor-pointer" data-date="future">
+                <div class="w-8 h-8 mx-auto mb-2 border border-white"></div>
+                ...........
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Interactive Seat Selection (initially hidden) -->
+    <div class="w-full mb-6 hidden" id="seat-selection-section">
+        <h3 class="text-lg font-semibold mb-2 text-center">Інтерактивний вибір місця(після вибору дати):</h3>
+        <!-- Placeholder for seating layout -->
+        <div class="bg-gray-700 p-4 rounded-lg">
+            <!-- Seating layout based on the image -->
+             <div class="flex justify-center mb-4">
+                <div class="w-3/4 h-4 bg-gray-500 rounded-t-full"></div>
+            </div>
+            <div class="grid grid-cols-10 gap-2">
+                {% for row in '1234567'|ljust:7 %}
+                    <div class="col-span-1 text-center">{{ forloop.counter }}</div>
+                    {% for seat in 'AAAAAAAA' %}
+                        <button class="seat-button col-span-1 bg-gray-500 rounded-sm w-6 h-6 flex items-center justify-center cursor-pointer" data-row="{{ forloop.parentloop.counter }}" data-seat="{{ forloop.counter0|add:1 }}"></button>
+                    {% endfor %}
+                    <div class="col-span-1 text-center">{{ forloop.parentloop.counter }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Legend -->
+            <div class="flex justify-center mt-4 space-x-6 text-sm">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-red-600 rounded-full mr-1"></div>
+                    вибрані місця
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-gray-500 rounded-full mr-1"></div>
+                    занято
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-gray-300 rounded-full mr-1"></div>
+                    вільно
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Selected Seats -->
+    <div class="w-full mt-6" id="selected-seats-info">
+        <h3 class="text-lg font-semibold mb-2 text-center">Вибрано:</h3>
+        <p class="text-center">Не вибрано жодного місця</p>
+    </div>
+
+    <!-- 6. Total Price -->
+    <div class="w-full mt-6 text-xl font-bold text-center" id="total-price">
+        До оплати: 0 грн
+    </div>
+
+    <!-- 7. Continue Button -->
+    <div class="w-full mt-6 flex justify-center">
+        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Продовжити
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateOptions = document.querySelectorAll('.date-option');
+        const seatSelectionSection = document.getElementById('seat-selection-section');
+        const seatButtons = document.querySelectorAll('.seat-button');
+        const selectedSeatsInfo = document.getElementById('selected-seats-info');
+        const totalPriceElement = document.getElementById('total-price');
+        let selectedSeats = [];
+        const pricePerSeat = 160; // Example price per seat
+
+        function updateSelectedSeatsInfo() {
+            selectedSeatsInfo.innerHTML = '<h3 class="text-lg font-semibold mb-2 text-center">Вибрано:</h3>';
+            if (selectedSeats.length === 0) {
+                selectedSeatsInfo.innerHTML += '<p class="text-center">Не вибрано жодного місця</p>';
+            } else {
+                selectedSeats.forEach(seat => {
+                    selectedSeatsInfo.innerHTML += `<p class="text-center">Ряд ${seat.row} Місце ${seat.seat}</p>`;
+                });
+            }
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const total = selectedSeats.length * pricePerSeat;
+            totalPriceElement.innerText = `До оплати: ${total} грн`;
+        }
+
+        // Handle date selection
+        dateOptions.forEach(dateOption => {
+            dateOption.addEventListener('click', function() {
+                // Remove active class from all date options
+                dateOptions.forEach(option => option.classList.remove('border-red-600'));
+                // Add active class to the clicked date option
+                this.classList.add('border-red-600');
+
+                // Show the seat selection section
+                seatSelectionSection.classList.remove('hidden');
+
+                // Reset selected seats when a new date is chosen
+                selectedSeats = [];
+                seatButtons.forEach(button => {
+                    button.classList.remove('bg-red-600');
+                    button.classList.add('bg-gray-500');
+                });
+                updateSelectedSeatsInfo();
+            });
+        });
+
+        // Handle seat selection
+        seatButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                 // Only allow selecting if a date is selected (seat selection section is visible)
+                if (!seatSelectionSection.classList.contains('hidden')) {
+                    const row = parseInt(this.dataset.row);
+                    const seat = parseInt(this.dataset.seat);
+                    const seatIndex = selectedSeats.findIndex(s => s.row === row && s.seat === seat);
+
+                    if (seatIndex > -1) {
+                        // Seat is already selected, remove it
+                        selectedSeats.splice(seatIndex, 1);
+                        this.classList.remove('bg-red-600');
+                        this.classList.add('bg-gray-500');
+                    } else {
+                        // Seat is not selected, add it
+                        selectedSeats.push({ row: row, seat: seat });
+                        this.classList.remove('bg-gray-500');
+                        this.classList.add('bg-red-600');
+                    }
+
+                    updateSelectedSeatsInfo();
+                }
+            });
+        });
+
+        // Initial update
+        updateSelectedSeatsInfo();
+    });
+</script>
+
+{% endblock %} 

@@ -22,6 +22,10 @@ def movie_detail_page(request, slug):
     dummy_movie = {'slug': slug, 'title': 'Dummy Movie Title'}
     return render(request, 'movie/movie_detail.html', {'movie': dummy_movie, 'title': 'Movie Detail'})
 
+# Add view for the booking page
+def book_ticket_page(request):
+    return render(request, 'movie/book_ticket.html', {'title': 'Оформлення квитка'})
+
 # Placeholders for create/update/delete if you added those URLs
 # def movie_create(request): pass
 # def movie_update(request, slug): pass

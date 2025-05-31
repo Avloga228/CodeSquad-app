@@ -15,6 +15,9 @@ urlpatterns = [
     # Add placeholder for movie detail page required by nav links
     path('movie/<slug:slug>/', views.movie_detail_page, name='movie_detail'),
 
+    # Add URL for the booking page
+    path('book/', views.book_ticket_page, name='book_ticket'),
+
     # Add other movie urls from Project 1 later if needed (create, update, delete)
     # path('create/', views.movie_create, name='movie_create'),
     # path('<slug:slug>/update/', views.movie_update, name='movie_update'),
