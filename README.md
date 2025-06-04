@@ -30,8 +30,6 @@ The project structure is organized as follows:
 - **User Authentication**: Utilizes Django's built-in authentication system for user registration, login, and logout.
 - **Movie Listing**: Displays a list of movies, categorized as most popular, TV series, and new releases.
 - **Movie Details**: Provides detailed information about each movie, including description, trailers, reviews, etc.
-- **Subscription Handling**: Allows users to subscribe to different plans offering access to premium content.
-- **Payment Integration**: Integrates PayPal for subscription payments.
 - **User Profiles**: Provides user profiles with a watchlist feature to bookmark favorite movies.
 
 ## Installation
@@ -40,8 +38,8 @@ Follow these steps to set up the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/munuhee/CinemaTicket.git
-   cd CinemaTicket
+   git clone https://github.com/Avloga228/CodeSquad-app.git
+   cd CodeSquad-app
    ```
 
 2. Create a virtual environment and activate it:
@@ -49,7 +47,7 @@ Follow these steps to set up the project locally:
    python -m venv env
    source env/bin/activate  # For Unix or MacOS
    # Or
-   .\env\Scripts\activate  # For Windows
+   env\Scripts\activate  # For Windows
    ```
 
 3. Install dependencies:
