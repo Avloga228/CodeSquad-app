@@ -1,0 +1,123 @@
+{% extends 'movie/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6">
+        <!-- Search and Filters Section -->
+        <div class="mb-8">
+            <form method="get" class="flex flex-col md:flex-row gap-4">
+                <!-- Search Bar -->
+                <div class="flex-1">
+                    <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Search movies..." 
+                           class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
+                </div>
+                
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4">
+                    <!-- Genre Filter -->
+                    <select name="genre" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
+                        <option value="">All Genres</option>
+                        {% for genre in genres %}
+                        <option value="{{ genre.id }}" {% if selected_genre == genre.id|stringformat:"s" %}selected{% endif %}>
+                            {{ genre.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Rating Filter -->
+                    <select name="rating" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
+                        <option value="">All Ratings</option>
+                        <option value="9" {% if selected_rating == '9' %}selected{% endif %}>9+ Stars</option>
+                        <option value="8" {% if selected_rating == '8' %}selected{% endif %}>8+ Stars</option>
+                        <option value="7" {% if selected_rating == '7' %}selected{% endif %}>7+ Stars</option>
+                        <option value="6" {% if selected_rating == '6' %}selected{% endif %}>6+ Stars</option>
+                    </select>
+
+                    <!-- Sort By -->
+                    <select name="sort" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest First</option>
+                        <option value="oldest" {% if sort_by == 'oldest' %}selected{% endif %}>Oldest First</option>
+                        <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>Highest Rated</option>
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title A-Z</option>
+                    </select>
+
+                    <!-- Apply Filters Button -->
+                    <button type="submit" class="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+                        Apply Filters
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Movies Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for movie in movies %}
+            <div class="group relative rounded-lg overflow-hidden shadow-lg">
+                <div class="relative">
+                    {% if movie.poster %}
+                        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="w-full h-auto">
+                    {% else %}
+                        <img src="{% static 'movie-image.jpg' %}" alt="{{ movie.title }}" class="w-full h-auto">
+                    {% endif %}
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-1">{{ movie.rating }}/10</div>
+                    <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <a href="{% url 'movies:movie_detail' movie.slug %}" class="bg-red-600 text-white rounded-full p-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="p-3 bg-gray-800">
+                    <div class="flex space-x-1 mb-2">
+                        {% for genre in movie.genres.all %}
+                        <span class="bg-gray-700 text-xs px-2 py-1 rounded">{{ genre.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <h3 class="font-bold text-lg">{{ movie.title }}</h3>
+                    <p class="text-sm text-gray-400 mt-1">{{ movie.release_date|date:"M d, Y" }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-10">
+                <p class="text-gray-600 text-lg">No movies found matching your criteria.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if movies.has_other_pages %}
+        <div class="mt-8 flex justify-center">
+            <div class="flex space-x-2">
+                {% if movies.has_previous %}
+                <a href="?page={{ movies.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_genre %}&genre={{ selected_genre }}{% endif %}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" 
+                   class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
+                    Previous
+                </a>
+                {% endif %}
+
+                {% for num in movies.paginator.page_range %}
+                    {% if movies.number == num %}
+                    <span class="px-4 py-2 bg-red-600 rounded-lg">{{ num }}</span>
+                    {% else %}
+                    <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}{% if selected_genre %}&genre={{ selected_genre }}{% endif %}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" 
+                       class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
+                        {{ num }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if movies.has_next %}
+                <a href="?page={{ movies.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_genre %}&genre={{ selected_genre }}{% endif %}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" 
+                   class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
+                    Next
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

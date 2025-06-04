@@ -1,0 +1,68 @@
+{% extends 'movie/base.html' %}
+
+{% block content %}
+<div class="mx-4 md:mx-8 lg:mx-16 my-4 md:my-6 lg:my-8">
+  <form method="GET" action="{% url 'movies:tv_series_list' %}" class="mb-6">
+    <div class="flex items-center border-b border-gray-300 py-2">
+      <input
+        type="text"
+        name="q"
+        placeholder="Search TV series"
+        class="appearance-none bg-transparent border-none w-full text-gray-800 placeholder-gray-500 py-2 px-3 leading-tight focus:outline-none focus:placeholder-gray-400"
+        aria-label="Search TV series" />
+      <button
+        type="submit"
+        class="ml-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-5.2-5.2a8 8 0 10-1.4 1.4L21 21zm-9.8-3.8A6 6 0 1115 9.5a6 6 0 01-3.8 7.7z" />
+        </svg>
+        Search
+      </button>
+    </div>
+  </form>
+
+  <!-- Pagination links -->
+  <div class="my-6">
+    <span class="text-gray-600">Page {{ tv_series.number }} of {{ tv_series.paginator.num_pages }}</span>
+    {% if tv_series.has_previous %}
+      <a href="?page=1" class="text-blue-500 mx-2">First</a>
+      <a href="?page={{ tv_series.previous_page_number }}" class="text-blue-500 mx-2">Previous</a>
+    {% endif %}
+    {% if tv_series.has_next %}
+      <a href="?page={{ tv_series.next_page_number }}" class="text-blue-500 mx-2">Next</a>
+      <a href="?page={{ tv_series.paginator.num_pages }}" class="text-blue-500 mx-2">Last</a>
+    {% endif %}
+  </div>
+
+  <!-- Display movies based on search results -->
+  {% if query %}
+    <h2 class="font-bold text-lg md:text-xl lg:text-2xl my-4 md:my-6 lg:my-8">Search results for '{{ query }}'</h2>
+  {% else %}
+    <h2 class="font-bold text-lg md:text-xl lg:text-2xl my-4 md:my-6 lg:my-8">All TV SERIES</h2>
+  {% endif %}
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
+    {% for movie in tv_series %}
+    <div class="max-w-xs rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="{{ movie.image.url }}" alt="Movie Poster">
+      <div class="px-3 py-2">
+        <div class="font-bold text-sm"><a href="{% url 'movies:movie_detail' movie.slug %}">{{ movie.title }}</a></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Pagination links repeated for clarity -->
+  <div class="my-6">
+    <span class="text-gray-600">Page {{ tv_series.number }} of {{ tv_series.paginator.num_pages }}</span>
+    {% if tv_series.has_previous %}
+      <a href="?page=1" class="text-blue-500 mx-2">First</a>
+      <a href="?page={{ tv_series.previous_page_number }}" class="text-blue-500 mx-2">Previous</a>
+    {% endif %}
+    {% if tv_series.has_next %}
+      <a href="?page={{ tv_series.next_page_number }}" class="text-blue-500 mx-2">Next</a>
+      <a href="?page={{ tv_series.paginator.num_pages }}" class="text-blue-500 mx-2">Last</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
