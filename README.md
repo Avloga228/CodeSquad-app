@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python Version](https://img.shields.io/badge/Python-3.10-green)](https://www.python.org/downloads/)
 
-This Django-based subscription movie website allows users to subscribe to access premium movies. The site includes user authentication, subscription handling,paypal payment integration, and access control for premium content.
+This Django-based website for booking cinema tickets. The site includes user authentication, loyalty programm, movies list, admin settings.
 
 ## Table of Contents
 
@@ -23,7 +23,6 @@ The project structure is organized as follows:
   - **movie**: App handling movie-related functionalities.
   - **user_profile**: App managing user profiles and watchlists.
   - **review**: App handling movie reviews.
-  - **subscription**: App managing subscription plans and handling payments.
 
 ## Features
 

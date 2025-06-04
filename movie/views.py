@@ -32,11 +32,10 @@ from decimal import Decimal
 def home(request):
     """Renders the home page with different movie categories."""
     # Get homepage settings
-    try:
-        settings = HomepageSettings.objects.first()
-    except HomepageSettings.DoesNotExist:
-        settings = HomepageSettings.objects.create(name='Default Homepage Settings')
-    
+    settings = HomepageSettings.objects.first()
+    if settings is None:
+        settings = HomepageSettings.objects.create(name='Homepage Settings')
+
     # Get featured movies for carousel
     featured_movies = settings.featured_movies.all()[:3]
     if not featured_movies:
