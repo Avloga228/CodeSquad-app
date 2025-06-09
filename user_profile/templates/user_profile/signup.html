@@ -19,7 +19,7 @@
             
             {# Manual rendering of fields with custom classes #}
             <div>
-                <label for="{{ form.username.id_for_label }}" class="block text-base font-medium text-gray-300">{{ form.username.label }}</label>
+                <label for="{{ form.username.id_for_label }}" class="block text-base font-medium text-gray-300">Ім'я користувача</label>
                 <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" {% if form.username.field.required %}required{% endif %} autocomplete="new-username">
                 {% if form.username.errors %}
                     <div class="mt-1 text-sm text-red-400">
@@ -31,7 +31,7 @@
             </div>
 
             <div>
-                <label for="{{ form.email.id_for_label }}" class="block text-base font-medium text-gray-300">{{ form.email.label }}</label>
+                <label for="{{ form.email.id_for_label }}" class="block text-base font-medium text-gray-300">Електронна пошта</label>
                 <input type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" value="{{ form.email.value|default:'' }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" {% if form.email.field.required %}required{% endif %}>
                 {% if form.email.errors %}
                     <div class="mt-1 text-sm text-red-400">
@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <label for="{{ form.password1.id_for_label }}" class="block text-base font-medium text-gray-300">{{ form.password1.label }}</label>
+                <label for="{{ form.password1.id_for_label }}" class="block text-base font-medium text-gray-300">Пароль</label>
                 <input type="password" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" {% if form.password1.field.required %}required{% endif %} autocomplete="new-password">
                 {% if form.password1.errors %}
                     <div class="mt-1 text-sm text-red-400">
@@ -55,7 +55,7 @@
             </div>
 
             <div>
-                <label for="{{ form.password2.id_for_label }}" class="block text-base font-medium text-gray-300">{{ form.password2.label }}</label>
+                <label for="{{ form.password2.id_for_label }}" class="block text-base font-medium text-gray-300">Підтвердження пароля</label>
                 <input type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" {% if form.password2.field.required %}required{% endif %} autocomplete="new-password">
                 {% if form.password2.errors %}
                     <div class="mt-1 text-sm text-red-400">
