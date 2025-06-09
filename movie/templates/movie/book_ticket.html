@@ -47,11 +47,11 @@
 
             <!-- Booking Section -->
             <div class="bg-gray-800 rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">Book Your Tickets</h2>
+                <h2 class="text-2xl font-bold mb-6">Забронюйте свої квитки</h2>
                 
                 <!-- Date Selection -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-3">Select Date</h3>
+                    <h3 class="text-lg font-semibold mb-3">Виберіть дату</h3>
                     <div class="grid grid-cols-7 gap-2">
                         {% for date in available_dates %}
                         <a href="?date={{ date|date:'Y-m-d' }}{% if selected_time %}&time={{ selected_time|time:'H:i' }}{% endif %}" 
@@ -59,14 +59,14 @@
                             {{ date|date:"d M" }}
                         </a>
                         {% empty %}
-                        <p class="col-span-7 text-gray-400">No showings available for this movie.</p>
+                        <p class="col-span-7 text-gray-400">Не має показів цього фільму у цей день.</p>
                         {% endfor %}
                     </div>
                 </div>
 
                 <!-- Time and Hall Selection -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-3">Select Time and Hall</h3>
+                    <h3 class="text-lg font-semibold mb-3">Виберіть час та залу</h3>
                     {% if sessions_for_date %}
                         <div class="space-y-4">
                             {% for time, sessions_at_time in sessions_for_date.items %}
@@ -77,8 +77,8 @@
                                             <a href="?date={{ selected_date|date:'Y-m-d' }}&session_id={{ session_obj.id }}"
                                                class="p-3 text-center rounded-lg bg-gray-600 hover:bg-red-600 transition-colors
                                                       {% if session and session.id == session_obj.id %}bg-red-600 hover:bg-red-700{% endif %}">
-                                                <p class="font-semibold">Hall: {{ session_obj.hall.name }}</p>
-                                                <p class="text-sm">Price: ${{ session_obj.price }}</p>
+                                                <p class="font-semibold">Зал: {{ session_obj.hall.name }}</p>
+                                                <p class="text-sm">Ціна: {{ session_obj.price }} $</p>
                                             </a>
                                         {% endfor %}
                                     </div>
@@ -86,7 +86,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="col-span-4 text-gray-400">Please select a date first, or no sessions are available for the selected date.</p>
+                        <p class="col-span-4 text-gray-400">Спершу оберіть дату або ж жодного показу на цей день.</p>
                     {% endif %}
                 </div>
 
@@ -98,15 +98,15 @@
                     <input type="hidden" name="selected_seats" id="selected-seats-input">
 
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3">Session Details - {{ session.hall.name }} at {{ session.time|time:"H:i" }}</h3>
+                        <h3 class="text-lg font-semibold mb-3">Деталі сесії - {{ session.hall.name }} на {{ session.time|time:"H:i" }}</h3>
                         <div class="bg-gray-700 p-4 rounded-lg">
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <p class="text-gray-400">Available Seats:</p>
+                                    <p class="text-gray-400">Доступні місця:</p>
                                     <p class="text-lg font-semibold">{{ session.get_available_seats }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400">Price per Ticket:</p>
+                                    <p class="text-gray-400">Ціна за квиток:</p>
                                     <p class="text-lg font-semibold" id="price-per-ticket">${{ session.price }}</p>
                                 </div>
                             </div>
@@ -115,12 +115,12 @@
 
                     <!-- Seat Selection -->
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3">Select Seats</h3>
+                        <h3 class="text-lg font-semibold mb-3">Виберіть місця</h3>
                         <div class="bg-gray-700 p-6 rounded-lg">
                             <!-- Screen -->
                             <div class="mb-8 text-center">
                                 <div class="bg-gray-600 h-8 rounded-t-lg mx-auto max-w-md"></div>
-                                <p class="text-gray-400 mt-2">Screen</p>
+                                <p class="text-gray-400 mt-2">Екран</p>
                             </div>
                             
                             <!-- Seat Map -->
@@ -146,15 +146,15 @@
                             <div class="mt-8 flex justify-center gap-8">
                                 <div class="flex items-center gap-2">
                                     <div class="w-6 h-6 rounded-t-lg bg-gray-600"></div>
-                                    <span class="text-gray-400">Available</span>
+                                    <span class="text-gray-400">Доступні</span>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <div class="w-6 h-6 rounded-t-lg bg-red-600"></div>
-                                    <span class="text-gray-400">Selected</span>
+                                    <span class="text-gray-400">Вибрані</span>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <div class="w-6 h-6 rounded-t-lg bg-gray-800"></div>
-                                    <span class="text-gray-400">Booked</span>
+                                    <span class="text-gray-400">Зайняті</span>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
 
                     <!-- Payment Method Selection -->
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-3">Payment Method</h3>
+                        <h3 class="text-lg font-semibold mb-3">Метод оплати</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label class="bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors">
                                 <input type="radio" name="payment_method" value="card" class="hidden" checked>
@@ -171,8 +171,8 @@
                                         <div class="w-3 h-3 bg-red-600 rounded-full radio-indicator"></div>
                                     </div>
                                     <div>
-                                        <p class="font-semibold">Credit Card</p>
-                                        <p class="text-sm text-gray-400">Pay with your credit card</p>
+                                        <p class="font-semibold">Банківська карта</p>
+                                        <p class="text-sm text-gray-400">Заплатіть своєю банкіською картою</p>
                                     </div>
                                 </div>
                             </label>
@@ -184,10 +184,10 @@
                                         <div class="w-3 h-3 bg-red-600 rounded-full radio-indicator hidden"></div>
                                     </div>
                                     <div>
-                                        <p class="font-semibold">Loyalty Points</p>
-                                        <p class="text-sm text-gray-400">Pay with your loyalty points</p>
+                                        <p class="font-semibold">Очки вірності</p>
+                                        <p class="text-sm text-gray-400">Заплатіть за допомогою очок вірності</p>
                                         {% if request.user.loyalty %}
-                                            <p class="text-sm text-red-600">Available: {{ request.user.loyalty.points }} points</p>
+                                            <p class="text-sm text-red-600">Доступно: {{ request.user.loyalty.points }} points</p>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -200,12 +200,12 @@
                         <div class="bg-gray-700 p-4 rounded-lg">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-gray-400">Selected Seats:</p>
+                                    <p class="text-gray-400">Обрані місця:</p>
                                     <p class="text-lg font-semibold" id="selected-seats-count">0</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-gray-400">Total Price:</p>
-                                    <p class="text-lg font-semibold" id="total-price">$0.00</p>
+                                    <p class="text-gray-400">Повна ціна:</p>
+                                    <p class="text-lg font-semibold" id="total-price">0.00$</p>
                                     {% if request.user.loyalty and request.user.loyalty.tier %}
                                         <p class="text-sm text-green-400" id="discount-display" style="display: none;">{{ request.user.loyalty.tier.name|title }} rank discount applied: {{ request.user.loyalty.tier.discount_percentage }}%</p>
                                     {% endif %}
@@ -216,12 +216,12 @@
                     </div>
 
                     <button type="submit" id="book-button" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
-                        Proceed to Purchase
+                        Перейти до оплати
                     </button>
                 </form>
                 {% else %}
                      <div class="bg-gray-700 rounded-lg p-6">
-                         <p class="text-gray-400 text-center">Select a date, time, and hall above to see seat availability.</p>
+                         <p class="text-gray-400 text-center">Виберіть дату, залу та час аби побачити всі доступні місця.</p>
                      </div>
                 {% endif %}
             </div>
@@ -234,7 +234,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const seatButtons = document.querySelectorAll('.seat-btn');
     const selectedSeatsCount = document.getElementById('selected-seats-count');
-    const totalPriceElement = document.getElementById('total-price');
+    const totalPriceDisplay = document.getElementById('total-price');
+    const pointsPriceDisplay = document.getElementById('points-price-display');
+    const discountDisplay = document.getElementById('discount-display');
     const bookButton = document.getElementById('book-button');
     const pricePerTicketElement = document.getElementById('price-per-ticket');
     const pricePerTicket = pricePerTicketElement ? parseFloat(pricePerTicketElement.textContent.replace('$', '')) : 0;
@@ -261,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!button.disabled) {  // Only add click handler to available seats
             button.addEventListener('click', function() {
                 const seatId = this.dataset.seatId;
+                console.log('Clicked seat:', seatId);
 
                 if (this.classList.contains('bg-red-600')) {
                     // Deselect seat
@@ -276,23 +279,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Update counts and prices
                 if (selectedSeatsCount) {
-                selectedSeatsCount.textContent = selectedSeats.size;
+                    selectedSeatsCount.textContent = selectedSeats.size;
                 }
                 
                 // Update hidden input with selected seats
                 if (selectedSeatsInput) {
-                selectedSeatsInput.value = Array.from(selectedSeats).join(',');
+                    selectedSeatsInput.value = Array.from(selectedSeats).join(',');
                 }
 
                 // Enable/disable book button
                 if (bookButton) {
-                bookButton.disabled = selectedSeats.size === 0;
+                    bookButton.disabled = selectedSeats.size === 0;
                 }
 
                 updatePriceDisplay();
             });
         }
     });
+
+    // Payment method selection
+    const paymentMethodInputs = document.querySelectorAll('input[name="payment_method"]');
+    paymentMethodInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            updatePriceDisplay();
+        });
+    });
+
+    // Form submission
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (selectedSeats.size === 0) {
+                showErrorModal('Будь ласка, оберіть хоча б одне місце');
+                return;
+            }
+            this.submit();
+        });
+    }
 
     // Error Modal Handling
     const errorModal = document.getElementById('error-modal');
@@ -324,60 +347,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === errorModal) {
             hideErrorModal();
         }
-    });
-
-    // Add event listener to the form submission
-    if (bookButton && bookingForm) {
-        bookButton.addEventListener('click', function(e) {
-            e.preventDefault();
-        if (selectedSeats.size > 0) {
-                const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked');
-                const totalPrice = selectedSeats.size * pricePerTicket;
-                
-                if (selectedPaymentMethod.value === 'points') {
-                    const pointsRequired = totalPrice * 5;
-                    const userPoints = {{ request.user.loyalty.points|default:0 }};
-                    
-                    if (userPoints < pointsRequired) {
-                        showErrorModal(`Not enough points. You have ${userPoints} points, but ${pointsRequired} points are required for this purchase.`);
-                        return;
-                    }
-                }
-                
-            bookingForm.submit();
-        }
-    });
-    }
-
-    // Payment method selection
-    const paymentMethodInputs = document.querySelectorAll('input[name="payment_method"]');
-    const totalPriceDisplay = document.getElementById('total-price');
-    const pointsPriceDisplay = document.getElementById('points-price-display');
-    const radioIndicators = document.querySelectorAll('.radio-indicator');
-    const discountDisplay = document.getElementById('discount-display');
-
-    // Function to update radio button indicators
-    function updateRadioIndicators() {
-        const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
-        if (selectedMethod) {
-            radioIndicators.forEach((indicator, index) => {
-                if ((selectedMethod.value === 'card' && index === 0) || (selectedMethod.value === 'points' && index === 1)) {
-                    indicator.classList.remove('hidden');
-                } else {
-                    indicator.classList.add('hidden');
-                }
-            });
-        }
-    }
-
-    // Initial update of radio indicators
-    updateRadioIndicators();
-
-    paymentMethodInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            updatePriceDisplay();
-            updateRadioIndicators();
-        });
     });
 
     // Update price display when seats are selected or payment method changes
@@ -412,33 +381,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 if (pointsPriceDisplay) pointsPriceDisplay.style.display = 'none';
             }
-        
-         // Always update total price on seat selection even if payment method isn't explicitly changed
-         if (selectedPaymentMethod.value === 'card'){
-              let discountedPrice = originalPrice;
-              {% if request.user.is_authenticated and request.user.loyalty and request.user.loyalty.tier %}
-                const discountPercentage = {{ request.user.loyalty.tier.discount_percentage }};
-                const discountAmount = originalPrice * (discountPercentage / 100);
-                discountedPrice = originalPrice - discountAmount;
-              {% endif %}
-               if (totalPriceDisplay) {
-                    totalPriceDisplay.style.display = 'block';
-                    totalPriceDisplay.textContent = `$${discountedPrice.toFixed(2)}`;
-                }
-                 if (pointsPriceDisplay) pointsPriceDisplay.style.display = 'none';
-                 if (discountDisplay && discountedPrice < originalPrice) {
-                      discountDisplay.style.display = 'block';
-                 } else if (discountDisplay) {
-                     discountDisplay.style.display = 'none';
-                 }
-         } else if (selectedPaymentMethod.value === 'points'){
-             if (totalPriceDisplay) totalPriceDisplay.style.display = 'none';
-                if (pointsPriceDisplay) {
-                    pointsPriceDisplay.style.display = 'block';
-                    pointsPriceDisplay.textContent = `${originalPrice * 5} points`;
-                }
-             if (discountDisplay) discountDisplay.style.display = 'none';
-         }
+        }
     }
 
     // Initial price display update when the page loads
