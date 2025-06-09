@@ -122,7 +122,7 @@
             {% if user_profile.user.loyalty %}
                  <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                      <i class="fas fa-medal mr-2 text-lg text-blueGray-400"></i>
-                     Рівень вірності: {% if user_profile.user.loyalty.tier %}{{ user_profile.user.loyalty.tier.name|title }}{% else %}НЕМАЄ РІВНЯ{% endif %}
+                     Рівень програми лояльності: {% if user_profile.user.loyalty.tier %}{{ user_profile.user.loyalty.tier.name|title }}{% else %}НЕМАЄ РІВНЯ{% endif %}
                  </div>
             {% endif %}
           </div>
@@ -169,18 +169,17 @@
                     </div>
                     <div class="h-24 w-px bg-gray-700"></div>
                     <div class="text-center">
-                      <div class="text-3xl font-bold text-white mb-1">${{ booking.session.price }}</div>
+                      <div class="text-3xl font-bold text-white mb-1">₴{{ booking.session.price }}</div>
                       <div class="text-gray-400 text-sm">ЦІНА</div>
                     </div>
                     <div class="h-24 w-px bg-gray-700"></div>
                     <div class="text-center">
                       <div class="text-xl font-bold {% if booking.status == 'confirmed' %}text-green-500{% elif booking.status == 'pending' %}text-yellow-500{% else %}text-red-500{% endif %} mb-1">
-                        {{ booking.status|upper }}
-                      </div>
+                        {% if booking.status == 'confirmed' %}ПІДТВЕРДЖЕНО{% elif booking.status == 'pending' %}ОБРОБЛЯЄТЬСЯ{% else %}СКАСОВАНО{% endif %}                      </div>
                       <div class="text-gray-400 text-sm">СТАТУС</div>
                       <!-- QR Code Button -->
                       <button class="generate-qr-btn mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors" data-booking-id="{{ booking.id }}" data-seat-id="{{ seat_id }}" data-username="{{ user_profile.user.username }}">
-                        Generate QR
+                        Згенерувати QR
                       </button>
                     </div>
                   </div>

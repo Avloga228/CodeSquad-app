@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'CinemaTicket.urls'
@@ -115,7 +116,7 @@ LOGOUT_REDIRECT_URL = 'account:login'
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -141,8 +142,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Configure PayPal SDK settings
-PAYPAL_MODE = os.getenv('PAYPAL_MODE', default='sandbox')
-PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID', default='YOUR_SANDBOX_CLIENT_ID')
-PAYPAL_CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET', default='YOUR_SANDBOX_CLIENT_SECRET')
