@@ -81,7 +81,7 @@
     <!-- Bottom Shape -->
     <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
       <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+        <polygon class="text-red-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
       </svg>
     </div>
   </section>
@@ -179,7 +179,7 @@
                       </div>
                       <div class="text-gray-400 text-sm">STATUS</div>
                       <!-- QR Code Button -->
-                      <button class="generate-qr-btn mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-booking-id="{{ booking.id }}" data-seat-id="{{ seat_id }}" data-username="{{ user_profile.user.username }}">
+                      <button class="generate-qr-btn mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors" data-booking-id="{{ booking.id }}" data-seat-id="{{ seat_id }}" data-username="{{ user_profile.user.username }}">
                         Generate QR
                       </button>
                     </div>
@@ -195,7 +195,7 @@
             <i class="fas fa-ticket-alt"></i>
           </div>
           <p class="text-xl text-gray-600">You have no booked tickets yet.</p>
-          <a href="{% url 'movies:movie_list' %}" class="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+          <a href="{% url 'movies:movie_list' %}" class="mt-4 inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors">
             Browse Movies
           </a>
         </div>

@@ -5,14 +5,14 @@
 {% if messages %}
 <div class="fixed top-4 right-4 z-50">
     <div
-        class="rounded-lg bg-white border border-blue-500 shadow-md p-4 flex items-center">
-        <ul class="list-disc list-inside text-blue-700">
+        class="rounded-lg bg-white border border-red-500 shadow-md p-4 flex items-center">
+        <ul class="list-disc list-inside text-red-700">
             {% for message in messages %}
             <li>{{ message }}</li>
             {% endfor %}
         </ul>
         <button id="closeButton"
-            class="ml-4 text-blue-500 hover:text-blue-700 focus:outline-none">
+            class="ml-4 text-red-500 hover:text-red-700 focus:outline-none">
             <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
 </div>
 {% endif %}
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8 bg-gray-900">
     <div class="mb-8">
         <nav class="text-sm font-semibold">
             <a href="{% url 'movies:movie_list' %}" class="hover:text-gray-500">Home</a> /
@@ -94,7 +94,7 @@
                 {% for review, stars in review_stars_zip %}
                 <article class="border border-gray-700 rounded-md p-4 bg-gray-800">
                     <div class="flex items-center mb-4">
-                        <div class="bg-blue-600 rounded-full w-10 h-10 flex items-center justify-center">
+                        <div class="bg-red-600 rounded-full w-10 h-10 flex items-center justify-center">
                             <p class="font-medium text-white">{{ review.user.username.0 }}</p>
                         </div>
                         <div class="ml-3">
@@ -140,11 +140,11 @@
                     <!-- Comment Input -->
                     <div class="mb-6">
                         <label for="comment" class="block text-lg font-semibold mb-2 text-white">Your Comment:</label>
-                        <textarea name="comment" id="comment" class="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:border-blue-500 resize-none bg-gray-700 text-white placeholder-gray-400" rows="6" placeholder="Write your comment here..."></textarea>
+                        <textarea name="comment" id="comment" class="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:border-red-500 resize-none bg-gray-700 text-white placeholder-gray-400" rows="6" placeholder="Write your comment here..."></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300">Submit Review</button>
+                    <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition duration-300">Submit Review</button>
                 </form>
                 {% else %}
                 <p class="text-red-400">Login required to add a review.</p>
