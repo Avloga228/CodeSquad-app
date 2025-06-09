@@ -72,12 +72,12 @@
             <!-- Add to Watchlist if not in user's watchlist Button -->
             <div class="flex space-x-4">
                 {% if movie.subscription_required %}
-                    <a href="{% url 'subscription:subscriptions_list' %}" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                    <a href="{% url 'subscription:subscriptions_list' %}" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg transition-colors">
                         Subscribe to Watch
                     </a>
                 {% else %}
-                    <a href="{% url 'movies:book_ticket' movie.slug %}" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                        Book a Ticket
+                    <a href="{% url 'movies:book_ticket' movie.slug %}" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        Забронювати квиток
                     </a>
                 {% endif %}
             </div>
@@ -88,7 +88,7 @@
         class="flex flex-col md:flex-row justify-center items-start gap-8 mx-auto max-w-screen-lg">
         <!-- Customer Reviews -->
         <div class="w-full md:w-1/2 space-y-4">
-            <p class="text-white"><strong>Reviews:</strong> <span class="text-gray-300">{{ reviews_count }} reviews</span></p>
+            <p class="text-white"><strong>Відгуки:</strong> <span class="text-gray-300">{{ reviews_count }} reviews</span></p>
 
             {% if reviews_count > 0 %}
                 {% for review, stars in review_stars_zip %}
@@ -111,7 +111,7 @@
                 </article>
                 {% endfor %}
             {% else %}
-                <p class="text-gray-300">No reviews available.</p>
+                <p class="text-gray-300">Відгуків ще немає.</p>
             {% endif %}
         </div>
 
@@ -119,12 +119,12 @@
         <div class="w-full md:w-1/2">
             <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-md shadow-md border border-gray-700">
                 {% if user.is_authenticated %}
-                <h3 class="text-xl font-semibold mb-4 text-white">Add a Review</h3>
+                <h3 class="text-xl font-semibold mb-4 text-white">Додати відгук</h3>
                 <form method="post" class="space-y-4">
                     {% csrf_token %}
                     <!-- Star Rating Input -->
                     <div class="flex items-center mb-4 space-x-2">
-                        <label for="starRating" class="text-lg font-semibold text-white">Rating:</label>
+                        <label for="starRating" class="text-lg font-semibold text-white">Рейтинг:</label>
                         <div class="flex">
                             <input type="hidden" name="rating" id="starRatingInput" value="0">
                             <div class="flex" id="starRating">
@@ -139,12 +139,14 @@
 
                     <!-- Comment Input -->
                     <div class="mb-6">
-                        <label for="comment" class="block text-lg font-semibold mb-2 text-white">Your Comment:</label>
-                        <textarea name="comment" id="comment" class="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:border-red-500 resize-none bg-gray-700 text-white placeholder-gray-400" rows="6" placeholder="Write your comment here..."></textarea>
+                        <label for="comment" class="block text-lg font-semibold mb-2 text-white">Ваш відгук:</label>
+                        <textarea name="comment" id="comment" class="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:border-red-500 resize-none bg-gray-700 text-white placeholder-gray-400" rows="6" placeholder="Напишіть тут свій відгук..."></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition duration-300">Submit Review</button>
+                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                        Залишити відгук
+                    </button>
                 </form>
                 {% else %}
                 <p class="text-red-400">Login required to add a review.</p>

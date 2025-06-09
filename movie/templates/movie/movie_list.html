@@ -9,7 +9,7 @@
             <form method="get" class="flex flex-col md:flex-row gap-4">
                 <!-- Search Bar -->
                 <div class="flex-1">
-                    <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Search movies..." 
+                    <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Шукати фільми..." 
                            class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
                 </div>
                 
@@ -17,7 +17,7 @@
                 <div class="flex flex-wrap gap-4">
                     <!-- Genre Filter -->
                     <select name="genre" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
-                        <option value="">All Genres</option>
+                        <option value="">Всі жанри</option>
                         {% for genre in genres %}
                         <option value="{{ genre.id }}" {% if selected_genre == genre.id|stringformat:"s" %}selected{% endif %}>
                             {{ genre.name }}
@@ -27,24 +27,24 @@
 
                     <!-- Rating Filter -->
                     <select name="rating" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
-                        <option value="">All Ratings</option>
-                        <option value="9" {% if selected_rating == '9' %}selected{% endif %}>9+ Stars</option>
-                        <option value="8" {% if selected_rating == '8' %}selected{% endif %}>8+ Stars</option>
-                        <option value="7" {% if selected_rating == '7' %}selected{% endif %}>7+ Stars</option>
-                        <option value="6" {% if selected_rating == '6' %}selected{% endif %}>6+ Stars</option>
+                        <option value="">Всі оцінки</option>
+                        <option value="9" {% if selected_rating == '9' %}selected{% endif %}>9+ Зірок</option>
+                        <option value="8" {% if selected_rating == '8' %}selected{% endif %}>8+ Зірок</option>
+                        <option value="7" {% if selected_rating == '7' %}selected{% endif %}>7+ Зірок</option>
+                        <option value="6" {% if selected_rating == '6' %}selected{% endif %}>6+ Зірок</option>
                     </select>
 
                     <!-- Sort By -->
                     <select name="sort" class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-red-500 focus:outline-none">
-                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest First</option>
-                        <option value="oldest" {% if sort_by == 'oldest' %}selected{% endif %}>Oldest First</option>
-                        <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>Highest Rated</option>
-                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title A-Z</option>
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Нові найкращі</option>
+                        <option value="oldest" {% if sort_by == 'oldest' %}selected{% endif %}>Старі найкращі</option>
+                        <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>З найкращим рейтингом</option>
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Назва А-Я</option>
                     </select>
 
                     <!-- Apply Filters Button -->
-                    <button type="submit" class="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
-                        Apply Filters
+                    <button type="submit" class="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-lg transition-colors">
+                        Застосувати фільтри
                     </button>
                 </div>
             </form>
@@ -82,7 +82,7 @@
             </div>
             {% empty %}
             <div class="col-span-full text-center py-10">
-                <p class="text-gray-600 text-lg">No movies found matching your criteria.</p>
+                <p class="text-gray-600 text-lg">Не має фільмів які підпадають під ваші критерії.</p>
             </div>
             {% endfor %}
         </div>
@@ -94,7 +94,7 @@
                 {% if movies.has_previous %}
                 <a href="?page={{ movies.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_genre %}&genre={{ selected_genre }}{% endif %}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" 
                    class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
-                    Previous
+                    Попередні
                 </a>
                 {% endif %}
 
@@ -112,7 +112,7 @@
                 {% if movies.has_next %}
                 <a href="?page={{ movies.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_genre %}&genre={{ selected_genre }}{% endif %}{% if selected_rating %}&rating={{ selected_rating }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" 
                    class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
-                    Next
+                    Наступні
                 </a>
                 {% endif %}
             </div>

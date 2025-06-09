@@ -28,24 +28,24 @@
             
             {# Manual rendering of fields with custom classes #}
             <div>
-                <label for="{{ form.username.id_for_label }}" class="block text-base font-medium text-gray-300">Username</label>
-                <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" required>
+                <label for="{{ form.username.id_for_label }}" class="block text-base font-medium text-gray-300">Ім'я користувача</label>
+                <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50 bg-gray-700 text-white" required>
             </div>
             <div>
-                <label for="password" class="block text-base font-medium text-gray-300">Password</label>
-                <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 bg-gray-700 text-white" required>
+                <label for="password" class="block text-base font-medium text-gray-300">Пароль</label>
+                <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" class="mt-1 block w-full px-3 py-2 rounded-md border-gray-600 shadow-sm focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50 bg-gray-700 text-white" required>
             </div>
             
-            {# Add other fields if your login form has more #}
+        
 
             <div>
-                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Login
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    Увійти
                 </button>
             </div>
         </form>
         <div class="text-sm text-center mt-4">
-            <p class="text-gray-300">Don't have an account? <a href="{% url 'account:signup' %}" class="text-blue-400 hover:text-blue-500">Register here</a></p>
+            <p class="text-gray-300">Ще не зареєстровані? <a href="{% url 'account:signup' %}" class="text-red-500 hover:text-red-600">Зареєструватися</a></p>
         </div>
     </div>
 </div>

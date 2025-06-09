@@ -9,11 +9,11 @@
             <!-- Loyalty Status Card -->
             <div class="bg-gray-800 rounded-lg p-6 mb-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h1 class="text-3xl font-bold">Loyalty Program</h1>
+                    <h1 class="text-3xl font-bold">Програма вірності</h1>
                     <div class="flex items-center space-x-2">
-                        <span class="text-lg">Current Tier:</span>
+                        <span class="text-lg">Ваш рівень:</span>
                         <span class="px-4 py-2 rounded-full {% if user_loyalty.tier.name == 'bronze' %}bg-yellow-600{% elif user_loyalty.tier.name == 'silver' %}bg-gray-400{% elif user_loyalty.tier.name == 'gold' %}bg-yellow-400{% else %}bg-gray-600{% endif %}">
-                            {% if user_loyalty.tier %}{{ user_loyalty.tier.name|title }}{% else %}No Tier{% endif %}
+                            {% if user_loyalty.tier %}{{ user_loyalty.tier.name|title }}{% else %}Немає рівня{% endif %}
                         </span>
                     </div>
                 </div>
@@ -21,12 +21,12 @@
                 <!-- Available Points Display - Separated -->
                 <div class="bg-gray-700 rounded-lg p-4 mb-6">
                     <h2 class="text-2xl font-bold">{{ user_loyalty.points }}</h2>
-                    <p class="text-gray-400">Available Points</p>
+                    <p class="text-gray-400">Доступні очки</p>
                 </div>
 
                 <!-- Tier Progress Bar -->
                 <div class="bg-gray-700 rounded-lg p-6 mb-6">
-                    <h3 class="text-xl font-semibold mb-4">Tier Progress</h3>
+                    <h3 class="text-xl font-semibold mb-4">Прогрес рівня</h3>
                     <div class="relative h-8 bg-gray-600 rounded-full overflow-hidden mb-2">
                         {% comment %} Calculate progress percentage {% endcomment %}
                         {% with current_tier_points=user_loyalty.tier.points_required|default:0 next_tier_points=next_tier.points_required|default:user_loyalty.total_earned_points %} {# Use total_earned_points if next_tier doesn't exist #}
@@ -48,39 +48,38 @@
                         {% endwith %}
                         {% comment %} Display current total earned points on the bar {% endcomment %}
                          <div class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white z-10">
-                            {{ user_loyalty.total_earned_points }} Total Earned Points
+                            {{ user_loyalty.total_earned_points }}  очків зароблено за весь час
                         </div>
                     </div>
                     <div class="flex justify-between text-sm text-gray-400">
                         <span>
-                            {% if user_loyalty.tier %}{{ user_loyalty.tier.points_required }}{% else %}0{% endif %} ({% if user_loyalty.tier %}{{ user_loyalty.tier.name|title }}{% else %}No Tier{% endif %})
+                            {% if user_loyalty.tier %}{{ user_loyalty.tier.points_required }}{% else %}0{% endif %} ({% if user_loyalty.tier %}{{ user_loyalty.tier.name|title }}{% else %}Немає рівня{% endif %})
                         </span>
                         {% if next_tier %}
                             <span>
-                                {{ next_tier.points_required }} (To {{ next_tier.name|title }})
+                                {{ next_tier.points_required }} (До {{ next_tier.name|title }})
                             </span>
                         {% else %}
-                            <span>Max Tier Reached</span>
+                            <span>Максимального рівня досягнуто</span>
                         {% endif %}
                     </div>
                 </div>
 
                 <!-- Tier Benefits -->
                 <div class="mb-6">
-                    <h3 class="text-xl font-semibold mb-4">Your Benefits</h3>
+                    <h3 class="text-xl font-semibold mb-4">Ваші переваги</h3>
                     <div class="grid grid-cols-1 gap-4">
                         <div class="bg-gray-700 rounded-lg p-4">
-                            <h4 class="font-semibold mb-2">Discount on Tickets</h4>
+                            <h4 class="font-semibold mb-2">Знижки на квитки</h4>
                             <p class="text-2xl font-bold text-red-400">{{ user_loyalty.tier.discount_percentage }}%</p>
                         </div>
-                        {% comment %} Points Multiplier removed as requested {% endcomment %}
                     </div>
                 </div>
             </div>
 
             <!-- Recent Transactions -->
             <div class="bg-gray-800 rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">Recent Transactions</h2>
+                <h2 class="text-2xl font-bold mb-6">Нещодавні замовлення</h2>
                 {% if recent_transactions %}
                     <div class="space-y-4">
                         {% for transaction in recent_transactions %}
@@ -88,9 +87,9 @@
                                 <div>
                                     <p class="font-semibold">
                                         {% if transaction.transaction_type == 'earn' %}
-                                            Points Earned
+                                            Очків отримано
                                         {% else %}
-                                            Points Spent
+                                            Очків витрачено
                                         {% endif %}
                                     </p>
                                     <p class="text-sm text-gray-400">{{ transaction.created_at|date:"F d, Y H:i" }}</p>
@@ -107,7 +106,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="text-gray-400 text-center">No transactions yet.</p>
+                    <p class="text-gray-400 text-center">Немає замовлень.</p>
                 {% endif %}
             </div>
         </div>

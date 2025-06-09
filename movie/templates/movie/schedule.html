@@ -4,17 +4,17 @@
 {% block content %}
 <main class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6">
-        <h1 class="text-3xl font-bold mb-8">Movie Schedule</h1>
+        <h1 class="text-3xl font-bold mb-8">Розклад фільмів</h1>
 
         {# Date Navigation #}
         <div class="flex items-center space-x-4 mb-8">
             <a href="{% url 'movies:schedule' %}"
                class="px-4 py-2 rounded-full {% if selected_date == today %}bg-red-600{% else %}bg-gray-700{% endif %} text-white hover:bg-red-700">
-                Today
+                Сьогодні
             </a>
             <a href="{% url 'movies:schedule' %}?date={{ tomorrow|date:"Y-m-d" }}"
                class="px-4 py-2 rounded-full {% if selected_date == tomorrow %}bg-red-600{% else %}bg-gray-700{% endif %} text-white hover:bg-red-700">
-                Tomorrow
+                Завтра
             </a>
 
             {# Custom Date Picker Button #}
@@ -28,7 +28,7 @@
             <input type="date" id="scheduleDateInput" style="visibility:hidden;" data-schedule-url="{% url 'movies:schedule' %}">
         </div>
 
-        <h2 class="text-2xl font-bold mb-6">Schedule for {{ selected_date|date:"F d, Y" }}</h2>
+        <h2 class="text-2xl font-bold mb-6">Розклад на {{ selected_date|date:"F d, Y" }}</h2>
 
         {% if sessions %}
             <div class="grid grid-cols-1 gap-8">
@@ -66,9 +66,8 @@
                                         <p class="text-xl font-bold mb-2">{{ time_sessions.grouper|time:"H:i" }}</p>
                                         <div class="flex flex-wrap gap-3">
                                             {% for session in time_sessions.list %}
-                                                <a href="{% url 'movies:book_ticket' movie_session.grouper.slug %}?date={{ selected_date|date:"Y-m-d" }}&session_id={{ session.id }}"
-                                                   class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full text-sm">
-                                                    Hall: {{ session.hall.name }} (${{ session.price }})
+                                                <a href="{% url 'movies:book_ticket' movie_session.grouper.slug %}?date={{ selected_date|date:'Y-m-d' }}&session_id={{ session.id }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-sm">
+                                                    Забронювати квиток
                                                 </a>
                                             {% endfor %}
                                         </div>
@@ -80,7 +79,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-center text-gray-500 text-lg">No movie sessions scheduled for {{ selected_date|date:"F d, Y" }}.</p>
+            <p class="text-center text-gray-500 text-lg">Не має фільмів на {{ selected_date|date:"F d, Y" }}.</p>
         {% endif %}
     </div>
 </main>

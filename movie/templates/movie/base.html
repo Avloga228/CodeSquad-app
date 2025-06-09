@@ -83,21 +83,21 @@
           <div class="flex items-center space-x-4">
               <a href="{% url 'account:user_profile_detail' %}"
                  class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-[#070720] border border-gray-600 rounded-md hover:bg-[#0b0c2a] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  <span>{{ user.username }}'s Profile</span>
+                  <span>{{ user.username }} Профіль</span>
               </a>
               <form action="{% url 'account:logout' %}" method="post" class="inline">
                   {% csrf_token %}
                   <button type="submit"
-                          class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                      Logout
+                          class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                      Вийти
                   </button>
               </form>
           </div>
           {% else %}
           <!-- If the user is not authenticated -->
           <a href="{% url 'account:signup' %}"
-            class="inline-block px-4 py-2 text-xs font-medium text-white transition duration-300 ease-in-out bg-[#e53637] border border-[#e53637] rounded-md hover:bg-[#d32f2f] focus:outline-none focus:ring-2 focus:ring-[#e53637] focus:ring-opacity-50">
-            Sign In
+            class="inline-block px-4 py-2 text-xs font-medium text-white transition duration-300 ease-in-out bg-red-500 border border-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+            Увійти
           </a>
           {% endif %}
         </div>
@@ -145,13 +145,13 @@
             <form action="{% url 'account:logout' %}" method="post" class="inline">
               {% csrf_token %}
               <button type="submit" class="block w-full text-left py-2 px-4 text-gray-300 hover:bg-[#0b0c2a]">
-                Logout
+                Вийти
               </button>
             </form>
           </li>
           {% else %}
           <li>
-            <a class="block py-2 px-4 text-gray-300 hover:bg-[#0b0c2a]" href="{% url 'account:signup' %}">Sign In</a>
+            <a class="block py-2 px-4 text-gray-300 hover:bg-[#0b0c2a]" href="{% url 'account:signup' %}">Увійти</a>
           </li>
           {% endif %}
         </ul>
@@ -160,7 +160,7 @@
     {% block content %} {% endblock %}
     <footer class="bg-[#070720] text-gray-300 py-8">
       <div class="container mx-auto flex flex-col items-center">
-        <p class="text-lg mb-4">Connect with us on social media:</p>
+        <p class="text-lg mb-4">Знайдіть нас у соцмережах:</p>
         <div class="flex space-x-4">
           <a href="#" class="text-gray-400 hover:text-white transition duration-300">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@
             </svg>
           </a>
         </div>
-        <p class="mt-4 text-sm">© 2025 Cinema Ticket Booking. All rights reserved.</p>
+        <p class="mt-4 text-sm">© 2025 Cinema Ticket Booking. Всі права захищені.</p>
       </div>
     </footer>
 
