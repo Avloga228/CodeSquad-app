@@ -9,7 +9,7 @@
             <!-- Loyalty Status Card -->
             <div class="bg-gray-800 rounded-lg p-6 mb-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h1 class="text-3xl font-bold">Програма вірності</h1>
+                    <h1 class="text-3xl font-bold">Програма лояльності</h1>
                     <div class="flex items-center space-x-2">
                         <span class="text-lg">Ваш рівень:</span>
                         <span class="px-4 py-2 rounded-full {% if user_loyalty.tier.name == 'bronze' %}bg-yellow-600{% elif user_loyalty.tier.name == 'silver' %}bg-gray-400{% elif user_loyalty.tier.name == 'gold' %}bg-yellow-400{% else %}bg-gray-600{% endif %}">
@@ -21,7 +21,7 @@
                 <!-- Available Points Display - Separated -->
                 <div class="bg-gray-700 rounded-lg p-4 mb-6">
                     <h2 class="text-2xl font-bold">{{ user_loyalty.points }}</h2>
-                    <p class="text-gray-400">Доступні очки</p>
+                    <p class="text-gray-400">Доступні бали</p>
                 </div>
 
                 <!-- Tier Progress Bar -->
@@ -48,7 +48,7 @@
                         {% endwith %}
                         {% comment %} Display current total earned points on the bar {% endcomment %}
                          <div class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white z-10">
-                            {{ user_loyalty.total_earned_points }}  очків зароблено за весь час
+                            {{ user_loyalty.total_earned_points }}  балів зароблено за весь час
                         </div>
                     </div>
                     <div class="flex justify-between text-sm text-gray-400">
@@ -87,9 +87,9 @@
                                 <div>
                                     <p class="font-semibold">
                                         {% if transaction.transaction_type == 'earn' %}
-                                            Очків отримано
+                                            Балів отримано
                                         {% else %}
-                                            Очків витрачено
+                                            Балів витрачено
                                         {% endif %}
                                     </p>
                                     <p class="text-sm text-gray-400">{{ transaction.created_at|date:"F d, Y H:i" }}</p>

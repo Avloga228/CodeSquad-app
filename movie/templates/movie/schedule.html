@@ -30,43 +30,35 @@
 
         <h2 class="text-2xl font-bold mb-6">Розклад на {{ selected_date|date:"F d, Y" }}</h2>
 
-        {% if sessions %}
+        {% if movie_sessions %}
             <div class="grid grid-cols-1 gap-8">
-                {% comment %}
-                    Group sessions by movie to display each movie with its sessions
-                {% endcomment %}
-                {% regroup sessions by movie as movie_sessions %}
-
-                {% for movie_session in movie_sessions %}
+                {% for movie, sessions in movie_sessions.items %}
                     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col md:flex-row">
                         <div class="md:w-1/4 flex-shrink-0 h-full relative group">
-                            <a href="{% url 'movies:movie_detail' movie_session.grouper.slug %}" class="block w-full h-full">
-                                {% if movie_session.grouper.poster %}
-                                    <img src="{{ movie_session.grouper.poster.url }}" class="w-full h-full object-cover" alt="{{ movie_session.grouper.title }} Poster">
+                            <a href="{% url 'movies:movie_detail' movie.slug %}" class="block w-full h-full">
+                                {% if movie.poster %}
+                                    <img src="{{ movie.poster.url }}" class="w-full h-full object-cover" alt="{{ movie.title }} Poster">
                                 {% else %}
                                     <img src="{% static 'movie-image.jpg' %}" class="w-full h-full object-cover" alt="No Poster Available">
                                 {% endif %}
                                 {# Overlay for hover effect #}
                                 <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span class="text-white text-lg font-bold">View Details</span>
+                                    <span class="text-white text-lg font-bold">Детальніше</span>
                                 </div>
                             </a>
                         </div>
                         <div class="md:w-3/4 p-6 flex-grow">
-                            <h2 class="text-2xl font-bold mb-3">{{ movie_session.grouper.title }}</h2>
-                            <p class="text-gray-400 text-sm mb-4">{{ movie_session.grouper.description|truncatechars:150 }}</p>
+                            <h2 class="text-2xl font-bold mb-3">{{ movie.title }}</h2>
+                            <p class="text-gray-400 text-sm mb-4">{{ movie.description|truncatechars:150 }}</p>
                             
                             <div class="space-y-4">
-                                {% comment %}
-                                    Group sessions for this movie by time
-                                {% endcomment %}
-                                {% regroup movie_session.list by time as sessions_by_time %}
+                                {% regroup sessions by time as sessions_by_time %}
                                 {% for time_sessions in sessions_by_time %}
                                     <div>
                                         <p class="text-xl font-bold mb-2">{{ time_sessions.grouper|time:"H:i" }}</p>
                                         <div class="flex flex-wrap gap-3">
                                             {% for session in time_sessions.list %}
-                                                <a href="{% url 'movies:book_ticket' movie_session.grouper.slug %}?date={{ selected_date|date:'Y-m-d' }}&session_id={{ session.id }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-sm">
+                                                <a href="{% url 'movies:book_ticket' movie.slug %}?date={{ selected_date|date:'Y-m-d' }}&session_id={{ session.id }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-sm">
                                                     Забронювати квиток
                                                 </a>
                                             {% endfor %}
@@ -79,7 +71,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-center text-gray-500 text-lg">Не має фільмів на {{ selected_date|date:"F d, Y" }}.</p>
+            <p class="text-center text-gray-500 text-lg">Немає фільмів на {{ selected_date|date:"F d, Y" }}.</p>
         {% endif %}
     </div>
 </main>

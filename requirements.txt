@@ -5,7 +5,6 @@ charset-normalizer==3.3.2
 cryptography==41.0.7
 Django==5.0
 idna==3.6
-paypalrestsdk==1.13.3
 Pillow==10.1.0
 pycparser==2.21
 pyOpenSSL==23.3.0

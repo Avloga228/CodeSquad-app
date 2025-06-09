@@ -463,10 +463,18 @@ def schedule_view(request):
     else:
         selected_date = today
 
-    sessions = MovieSession.objects.filter(date=selected_date).order_by('time', 'hall__name')
+    # Get all sessions for the selected date
+    sessions = MovieSession.objects.filter(date=selected_date).order_by('movie', 'time', 'hall__name')
+    
+    # Group sessions by movie
+    movie_sessions = {}
+    for session in sessions:
+        if session.movie not in movie_sessions:
+            movie_sessions[session.movie] = []
+        movie_sessions[session.movie].append(session)
 
     context = {
-        'sessions': sessions,
+        'movie_sessions': movie_sessions,
         'selected_date': selected_date,
         'today': today,
         'tomorrow': tomorrow,
