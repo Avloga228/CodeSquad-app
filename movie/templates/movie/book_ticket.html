@@ -17,7 +17,7 @@
             </div>
             <p id="error-message" class="text-gray-300 mb-6"></p>
             <div class="flex justify-end">
-                <button id="modal-ok-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button id="modal-ok-button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     OK
                 </button>
             </div>
@@ -75,7 +75,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                         {% for session_obj in sessions_at_time %}
                                             <a href="?date={{ selected_date|date:'Y-m-d' }}&session_id={{ session_obj.id }}"
-                                               class="p-3 text-center rounded-lg bg-gray-600 hover:bg-blue-500 transition-colors
+                                               class="p-3 text-center rounded-lg bg-gray-600 hover:bg-red-600 transition-colors
                                                       {% if session and session.id == session_obj.id %}bg-red-600 hover:bg-red-700{% endif %}">
                                                 <p class="font-semibold">Hall: {{ session_obj.hall.name }}</p>
                                                 <p class="text-sm">Price: ${{ session_obj.price }}</p>
@@ -130,7 +130,7 @@
                                     <span class="text-gray-400 w-8 text-center">{{ row }}</span>
                                     {% for seat_num in session.hall.seats_per_row|get_range %}
                                     <button type="button" 
-                                        class="seat-btn w-8 h-8 rounded-t-lg bg-gray-600 hover:bg-blue-500 transition-colors"
+                                        class="seat-btn w-8 h-8 rounded-t-lg bg-gray-600 hover:bg-red-600 transition-colors"
                                         data-row="{{ row }}"
                                         data-seat="{{ seat_num }}"
                                         data-seat-id="{{ row }}-{{ seat_num }}"
@@ -149,7 +149,7 @@
                                     <span class="text-gray-400">Available</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-t-lg bg-blue-500"></div>
+                                    <div class="w-6 h-6 rounded-t-lg bg-red-600"></div>
                                     <span class="text-gray-400">Selected</span>
                                 </div>
                                 <div class="flex items-center gap-2">
@@ -167,8 +167,8 @@
                             <label class="bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors">
                                 <input type="radio" name="payment_method" value="card" class="hidden" checked>
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-6 h-6 border-2 border-blue-500 rounded-full flex items-center justify-center">
-                                        <div class="w-3 h-3 bg-blue-500 rounded-full radio-indicator"></div>
+                                    <div class="w-6 h-6 border-2 border-red-600 rounded-full flex items-center justify-center">
+                                        <div class="w-3 h-3 bg-red-600 rounded-full radio-indicator"></div>
                                     </div>
                                     <div>
                                         <p class="font-semibold">Credit Card</p>
@@ -180,14 +180,14 @@
                             <label class="bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors">
                                 <input type="radio" name="payment_method" value="points" class="hidden">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-6 h-6 border-2 border-blue-500 rounded-full flex items-center justify-center">
-                                        <div class="w-3 h-3 bg-blue-500 rounded-full radio-indicator hidden"></div>
+                                    <div class="w-6 h-6 border-2 border-red-600 rounded-full flex items-center justify-center">
+                                        <div class="w-3 h-3 bg-red-600 rounded-full radio-indicator hidden"></div>
                                     </div>
                                     <div>
                                         <p class="font-semibold">Loyalty Points</p>
                                         <p class="text-sm text-gray-400">Pay with your loyalty points</p>
                                         {% if request.user.loyalty %}
-                                            <p class="text-sm text-blue-400">Available: {{ request.user.loyalty.points }} points</p>
+                                            <p class="text-sm text-red-600">Available: {{ request.user.loyalty.points }} points</p>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -209,13 +209,13 @@
                                     {% if request.user.loyalty and request.user.loyalty.tier %}
                                         <p class="text-sm text-green-400" id="discount-display" style="display: none;">{{ request.user.loyalty.tier.name|title }} rank discount applied: {{ request.user.loyalty.tier.discount_percentage }}%</p>
                                     {% endif %}
-                                    <p class="text-sm text-blue-400" id="points-price-display" style="display: none;">0 points</p>
+                                    <p class="text-sm text-red-600" id="points-price-display" style="display: none;">0 points</p>
                                 </div>
                         </div>
                         </div>
                     </div>
 
-                    <button type="submit" id="book-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                    <button type="submit" id="book-button" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
                         Proceed to Purchase
                     </button>
                 </form>
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     bookedSeats.forEach(seatId => {
         const seatButton = document.querySelector(`.seat-btn[data-seat-id="${seatId}"]`);
         if (seatButton) {
-            seatButton.classList.remove('bg-gray-600', 'hover:bg-blue-500');
+            seatButton.classList.remove('bg-gray-600', 'hover:bg-red-600');
             seatButton.classList.add('bg-gray-800', 'cursor-not-allowed');
             seatButton.disabled = true;
         }
@@ -262,15 +262,15 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', function() {
                 const seatId = this.dataset.seatId;
 
-                if (this.classList.contains('bg-blue-500')) {
+                if (this.classList.contains('bg-red-600')) {
                     // Deselect seat
-                    this.classList.remove('bg-blue-500');
+                    this.classList.remove('bg-red-600');
                     this.classList.add('bg-gray-600');
                     selectedSeats.delete(seatId);
                 } else {
                     // Select seat
                     this.classList.remove('bg-gray-600');
-                    this.classList.add('bg-blue-500');
+                    this.classList.add('bg-red-600');
                     selectedSeats.add(seatId);
                 }
 
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 if (pointsPriceDisplay) pointsPriceDisplay.style.display = 'none';
             }
-        }
+        
          // Always update total price on seat selection even if payment method isn't explicitly changed
          if (selectedPaymentMethod.value === 'card'){
               let discountedPrice = originalPrice;
