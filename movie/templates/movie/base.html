@@ -37,25 +37,25 @@
             <li>
               <a href="{% url 'movies:home' %}"
                 class="hover:text-white {% if request.path == '/' %}text-white{% endif %}">
-                HOME
+                ГОЛОВНА
               </a>
             </li>
             <li>
               <a href="{% url 'movies:movie_list' %}"
                 class="hover:text-white {% if request.path == '/movies/' %}text-white{% endif %}">
-                MOVIES
+                ФІЛЬМИ
               </a>
             </li>
             <li>
               <a href="{% url 'movies:schedule' %}"
                 class="hover:text-white {% if request.path == '/schedule/' %}text-white{% endif %}">
-                SCHEDULE
+                РОЗКЛАД
               </a>
             </li>
             <li>
               <a href="{% url 'movies:loyalty_dashboard' %}"
                 class="hover:text-white {% if request.path == '/loyalty/' %}text-white{% endif %}">
-                LOYALTY
+                ПРОГРАМА ЛОЯЛЬНОСТІ
               </a>
             </li>
           </ul>

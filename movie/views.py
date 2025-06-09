@@ -375,7 +375,7 @@ def book_ticket(request, movie_slug):
                 if payment_method == 'points':
                     # Check if user has enough points
                     points_required = calculate_points_price(total_price)
-                    if not user_loyalty.points < points_required:
+                    if user_loyalty.points < points_required:
                         messages.error(request, 'Not enough points for this purchase.', extra_tags='error')
                         return redirect('movies:book_ticket', movie_slug=movie.slug)
                     
