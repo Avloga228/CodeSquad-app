@@ -364,22 +364,18 @@ def book_ticket(request, movie_slug):
 
                 # Calculate total price
                 total_price = session.price * len(seats_to_book)
-                
-                # Apply loyalty discount if user has a tier
+
+                # Get or create user loyalty at the start
                 user_loyalty, created = UserLoyalty.objects.get_or_create(user=request.user)
-                if user_loyalty and user_loyalty.tier:
-                    discount_percentage_decimal = Decimal(user_loyalty.tier.discount_percentage) / Decimal(100)
-                    discount = total_price * discount_percentage_decimal
-                    total_price -= discount
 
                 if payment_method == 'points':
-                    # Check if user has enough points
+                    # Check if user has enough points (using original price, no discount)
                     points_required = calculate_points_price(total_price)
                     if user_loyalty.points < points_required:
                         messages.error(request, 'Not enough points for this purchase.', extra_tags='error')
                         return redirect('movies:book_ticket', movie_slug=movie.slug)
                     
-                    # Create booking
+                    # Create booking with original price
                     booking = Booking.objects.create(
                         user=request.user,
                         session=session,
@@ -401,11 +397,17 @@ def book_ticket(request, movie_slug):
                     )
                     
                 else:  # payment_method == 'card'
+                    # Apply loyalty discount if user has a tier
+                    if user_loyalty.tier:
+                        discount_percentage_decimal = Decimal(user_loyalty.tier.discount_percentage) / Decimal(100)
+                        discount = total_price * discount_percentage_decimal
+                        total_price -= discount
+
                     # Simulate payment (for now, assume success)
                     payment_success = True
 
                     if payment_success:
-                        # Create booking
+                        # Create booking with discounted price
                         booking = Booking.objects.create(
                             user=request.user,
                             session=session,
@@ -414,9 +416,8 @@ def book_ticket(request, movie_slug):
                             status='confirmed'
                         )
                         
-                        # Add points for the purchase
+                        # Add points for the purchase (based on discounted price)
                         points_earned = int(float(total_price))
-                        user_loyalty, created = UserLoyalty.objects.get_or_create(user=request.user)
                         # Add points to current balance and total earned for tier calculation
                         user_loyalty.points += points_earned
                         user_loyalty.total_earned_points += points_earned

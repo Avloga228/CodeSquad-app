@@ -8,7 +8,7 @@
     <div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-red-500">Payment Error</h3>
+                <h3 class="text-xl font-bold text-red-500">Помилка оплати</h3>
                 <button id="close-modal" class="text-gray-400 hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -234,9 +234,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const seatButtons = document.querySelectorAll('.seat-btn');
     const selectedSeatsCount = document.getElementById('selected-seats-count');
-    const totalPriceDisplay = document.getElementById('total-price');
-    const pointsPriceDisplay = document.getElementById('points-price-display');
-    const discountDisplay = document.getElementById('discount-display');
+    const totalPriceElement = document.getElementById('total-price');
     const bookButton = document.getElementById('book-button');
     const pricePerTicketElement = document.getElementById('price-per-ticket');
     const pricePerTicket = pricePerTicketElement ? parseFloat(pricePerTicketElement.textContent.replace('₴', '')) : 0;
@@ -263,7 +261,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!button.disabled) {  // Only add click handler to available seats
             button.addEventListener('click', function() {
                 const seatId = this.dataset.seatId;
-                console.log('Clicked seat:', seatId);
 
                 if (this.classList.contains('bg-red-600')) {
                     // Deselect seat
@@ -279,43 +276,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Update counts and prices
                 if (selectedSeatsCount) {
-                    selectedSeatsCount.textContent = selectedSeats.size;
+                selectedSeatsCount.textContent = selectedSeats.size;
                 }
                 
                 // Update hidden input with selected seats
                 if (selectedSeatsInput) {
-                    selectedSeatsInput.value = Array.from(selectedSeats).join(',');
+                selectedSeatsInput.value = Array.from(selectedSeats).join(',');
                 }
 
                 // Enable/disable book button
                 if (bookButton) {
-                    bookButton.disabled = selectedSeats.size === 0;
+                bookButton.disabled = selectedSeats.size === 0;
                 }
 
                 updatePriceDisplay();
             });
         }
     });
-
-    // Payment method selection
-    const paymentMethodInputs = document.querySelectorAll('input[name="payment_method"]');
-    paymentMethodInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            updatePriceDisplay();
-        });
-    });
-
-    // Form submission
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (selectedSeats.size === 0) {
-                showErrorModal('Будь ласка, оберіть хоча б одне місце');
-                return;
-            }
-            this.submit();
-        });
-    }
 
     // Error Modal Handling
     const errorModal = document.getElementById('error-modal');
@@ -347,6 +324,60 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === errorModal) {
             hideErrorModal();
         }
+    });
+
+    // Add event listener to the form submission
+    if (bookButton && bookingForm) {
+        bookButton.addEventListener('click', function(e) {
+            e.preventDefault();
+        if (selectedSeats.size > 0) {
+                const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked');
+                const totalPrice = selectedSeats.size * pricePerTicket;
+                
+                if (selectedPaymentMethod.value === 'points') {
+                    const pointsRequired = totalPrice * 5;
+                    const userPoints = {{ request.user.loyalty.points|default:0 }};
+                    
+                    if (userPoints < pointsRequired) {
+                        showErrorModal(`Недостатньо балів лояльності. У вас є ${userPoints} балів, але для цієї оплати потрібно ${pointsRequired} балів.`);
+                        return;
+                    }
+                }
+                
+            bookingForm.submit();
+        }
+    });
+    }
+
+    // Payment method selection
+    const paymentMethodInputs = document.querySelectorAll('input[name="payment_method"]');
+    const totalPriceDisplay = document.getElementById('total-price');
+    const pointsPriceDisplay = document.getElementById('points-price-display');
+    const radioIndicators = document.querySelectorAll('.radio-indicator');
+    const discountDisplay = document.getElementById('discount-display');
+
+    // Function to update radio button indicators
+    function updateRadioIndicators() {
+        const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (selectedMethod) {
+            radioIndicators.forEach((indicator, index) => {
+                if ((selectedMethod.value === 'card' && index === 0) || (selectedMethod.value === 'points' && index === 1)) {
+                    indicator.classList.remove('hidden');
+                } else {
+                    indicator.classList.add('hidden');
+                }
+            });
+        }
+    }
+
+    // Initial update of radio indicators
+    updateRadioIndicators();
+
+    paymentMethodInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            updatePriceDisplay();
+            updateRadioIndicators();
+        });
     });
 
     // Update price display when seats are selected or payment method changes
@@ -382,6 +413,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (pointsPriceDisplay) pointsPriceDisplay.style.display = 'none';
             }
         }
+         // Always update total price on seat selection even if payment method isn't explicitly changed
+         if (selectedPaymentMethod.value === 'card'){
+              let discountedPrice = originalPrice;
+              {% if request.user.is_authenticated and request.user.loyalty and request.user.loyalty.tier %}
+                const discountPercentage = {{ request.user.loyalty.tier.discount_percentage }};
+                const discountAmount = originalPrice * (discountPercentage / 100);
+                discountedPrice = originalPrice - discountAmount;
+              {% endif %}
+               if (totalPriceDisplay) {
+                    totalPriceDisplay.style.display = 'block';
+                    totalPriceDisplay.textContent = `₴${discountedPrice.toFixed(2)}`;
+                }
+                 if (pointsPriceDisplay) pointsPriceDisplay.style.display = 'none';
+                 if (discountDisplay && discountedPrice < originalPrice) {
+                      discountDisplay.style.display = 'block';
+                 } else if (discountDisplay) {
+                     discountDisplay.style.display = 'none';
+                 }
+         } else if (selectedPaymentMethod.value === 'points'){
+             if (totalPriceDisplay) totalPriceDisplay.style.display = 'none';
+                if (pointsPriceDisplay) {
+                    pointsPriceDisplay.style.display = 'block';
+                    pointsPriceDisplay.textContent = `${originalPrice * 5} балів`;
+                }
+             if (discountDisplay) discountDisplay.style.display = 'none';
+         }
     }
 
     // Initial price display update when the page loads
